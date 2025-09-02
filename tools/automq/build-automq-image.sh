@@ -5,6 +5,8 @@
 
 set -e
 
+ROOT_DIR=$(pwd)
+
 # 检查参数
 if [ $# -ne 5 ]; then
     echo "Usage: $0 <AUTOMQ_VERSION> <AUTOMQ_URL> <KAFKA_VERSION> <DOCKER_ORG> <PROJECT_NAME>"
@@ -112,6 +114,8 @@ prometheus-metrics-model-1.3.6.jar"
 printf "%s\n" "$IGNORE_LIST" >> "${KAFKA_VERSION}.ignorelist"
 
 echo "Step 3: Building and Pushing Docker Images..."
+
+cd "$ROOT_DIR"
 
 # 构建和推送多架构镜像
 for ARCH in arm64 amd64; do
